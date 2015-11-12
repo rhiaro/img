@@ -15,7 +15,7 @@ foreach($dirs as $dir){
   <?php
     }else{
       ?>
-      <p><img src="<?=$cur?>/<?=$dir?>" width="200px" /></p>
+      <p><img src="<?=$cur?>/<?=$dir?>" width="200px" /> <?=$dir?></p>
       <?php
     }
   }
