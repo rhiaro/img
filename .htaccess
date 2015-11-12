@@ -1,0 +1,5 @@
+<IfModule mod_autoindex.c>
+HeaderName /top.html
+ReadmeName /end.html
+IndexIgnore top.html end.html
+</IfModule>
