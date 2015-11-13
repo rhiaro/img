@@ -5,7 +5,8 @@ $nuh = array(".", "..", ".git", ".htaccess", "end.html", "top.html", "index.php"
         
 if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   $cur = $_GET['dir'];
-  $meta = json_decode(file_get_contents($cur.".json"));
+  $nuh[] = $cur.".json";
+  $meta = file_get_contents($cur.".json");
   var_dump($meta);
 }else{ $cur = "/var/www/"; }
 $dirs = scandir($cur);
