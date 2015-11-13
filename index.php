@@ -3,8 +3,11 @@ include "top.html";
 
 $nuh = array(".", "..", ".git", ".htaccess", "end.html", "top.html", "index.php", "auth");
         
-if(isset($_GET['dir']) && is_dir($_GET['dir'])){ $cur = $_GET['dir']; }
-else{ $cur = "/var/www/"; }
+if(isset($_GET['dir']) && is_dir($_GET['dir'])){
+  $cur = $_GET['dir'];
+  $meta = json_decode(file_get_contents($cur.".json"));
+  var_dump($meta);
+}else{ $cur = "/var/www/"; }
 $dirs = scandir($cur);
 
 foreach($dirs as $dir){
