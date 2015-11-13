@@ -17,7 +17,14 @@ foreach($dirs as $dir){
       <li><a href="?dir=<?=$dir?>"><?=$dir?></a></li>
   <?php
     }else{
-      if(isset($meta['hide']) && !in_array($dir, $meta['hide'])){
+      if(isset($_GET['list'])){
+        ?>
+          {
+            "@id": "http://img.amy.gy/<?=$cur?>/<?=$dir?>",
+            "name": ""
+          },
+        <?
+      }elseif(isset($meta['hide']) && !in_array($dir, $meta['hide'])){
         ?>
         <p><img src="<?=$cur?>/<?=$dir?>" width="200px" /> <?=$dir?></p>
         <?php
