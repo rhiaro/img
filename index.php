@@ -1,44 +1,37 @@
 <?php
 include "top.html";
 
-$nuh = array(".", "..", ".git", ".htaccess", "end.html", "top.html", "index.php", "auth");
-        
+if(isset($_GET['u'])){ $u = $_GET['u']; }
+if(isset($_GET['p'])){ $p = $_GET['p']; }
+
 if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   $cur = $_GET['dir'];
-  $nuh[] = $cur.".json";
+  // Get album metadata
   $meta = json_decode(file_get_contents($cur."/".$cur.".json"), true);
-}else{ $cur = "/var/www/"; }
-var_dump($meta);
-$dirs = scandir($cur);
-?>
-    <h2><?=$meta['as2:name']?></h2>
-    <ul>
-<?
-foreach($dirs as $dir){
-  if(!in_array($dir, $nuh)){
-    if(is_dir($dir)){
-  ?>
-      <li><a href="?dir=<?=$dir?>"><?=$dir?></a></li>
-  <?php
-    }else{
-      // t-t-t-t-temp
-      if(isset($_GET['list'])){
-        ?>
-          {
-            "@id": "http://img.amy.gy/<?=$cur?>/<?=$dir?>",
-            "name": ""
-          },
-        <?
-      }elseif(isset($meta['hide']) && !in_array($dir, $meta['hide'])){
-        ?>
-        <p><img src="<?=$cur?>/<?=$dir?>" width="200px" /> <?=$dir?></p>
-        <?php
-      }
+}else{
+  // List all albums
+  $cur = "/var/www/";
+  $dirs = scandir($cur);
+  echo "<ul>";
+  foreach($dirs as $dir){
+    if(is_dir($dir) && $dir != "." && $dir != ".." && $dir != "auth"){
+      echo "<li><a href=\"?dir=$dir\">$dir</a></li>";
     }
   }
+  echo "</ul>";
 }
 ?>
-    </ul>
+
+<?if(isset($meta)):?>
+  <h2><?=$meta['as2:name']?></h2>
+  <ul>
+    <?foreach($meta['as2:items'] as $item):?>
+      <?if(!in_array($item, $meta['hide'])):?>
+        <p><img src="<?=$item['@id']?>" width="200px" /></p>
+        <p><?=$item['name']?> (<?=$item['@id']?>)</p>
+      <?endif?>
+    <?endforeach?>
+  </ul>
 <?
 include "end.html";
 ?>
