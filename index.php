@@ -9,7 +9,10 @@ if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   $meta = json_decode(file_get_contents($cur."/".$cur.".json"), true);
 }else{ $cur = "/var/www/"; }
 $dirs = scandir($cur);
-
+?>
+    <h2><?=$meta['as2:name']?></h2>
+    <ul>
+<?
 foreach($dirs as $dir){
   if(!in_array($dir, $nuh)){
     if(is_dir($dir)){
@@ -17,6 +20,7 @@ foreach($dirs as $dir){
       <li><a href="?dir=<?=$dir?>"><?=$dir?></a></li>
   <?php
     }else{
+      // t-t-t-t-temp
       if(isset($_GET['list'])){
         ?>
           {
@@ -32,5 +36,8 @@ foreach($dirs as $dir){
     }
   }
 }
+?>
+    </ul>
+<?
 include "end.html";
 ?>
