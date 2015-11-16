@@ -8,6 +8,7 @@ if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   $cur = $_GET['dir'];
   // Get album metadata
   $meta = json_decode(file_get_contents($cur."/".$cur.".json"), true);
+  $hidden = json_decode(file_get_contents($meta['img:hidden']), true);
 }else{
   // List all albums
   $cur = "/var/www/";
@@ -26,7 +27,7 @@ if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   <h2><?=$meta['as2:name']?></h2>
   <ul>
     <?foreach($meta['as2:items'] as $item):?>
-      <?if(!in_array($item, $meta['hide'])):?>
+      <?if(!in_array($item, $hidden['hidden'])):?>
         <p><img src="<?=$item['@id']?>" width="200px" /></p>
         <p><?=$item['as2:name']?> (<?=$item['@id']?>)</p>
       <?endif?>
