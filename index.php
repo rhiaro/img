@@ -8,6 +8,7 @@ if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   $nuh[] = $cur.".json";
   $meta = json_decode(file_get_contents($cur."/".$cur.".json"), true);
 }else{ $cur = "/var/www/"; }
+var_dump($meta);
 $dirs = scandir($cur);
 ?>
     <h2><?=$meta['as2:name']?></h2>
