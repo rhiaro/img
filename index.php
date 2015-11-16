@@ -9,6 +9,7 @@ if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   // Get album metadata
   $meta = json_decode(file_get_contents($cur."/".$cur.".json"), true);
   $hidden = json_decode(file_get_contents($meta['img:hidden']), true);
+  var_dump($hidden);
 }else{
   // List all albums
   $cur = "/var/www/";
