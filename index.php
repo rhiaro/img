@@ -1,4 +1,4 @@
-<?php
+<?
 include "top.html";
 
 if(isset($_GET['u'])){ $u = $_GET['u']; }
@@ -29,9 +29,10 @@ if(isset($_GET['dir']) && is_dir($_GET['dir'])){
       <?if(!in_array($item, $meta['hide'])):?>
         <p><img src="<?=$item['@id']?>" width="200px" /></p>
         <p><?=$item['name']?> (<?=$item['@id']?>)</p>
-      <?endif;?>
-    <?endforeach;?>
+      <?endif?>
+    <?endforeach?>
   </ul>
+<?endif?>
 <?
 include "end.html";
 ?>
