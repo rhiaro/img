@@ -1,7 +1,7 @@
 RewriteEngine on
 RewriteBase /
 
-RewriteCond %{REQUEST_URI} !^index.php
+RewriteCond %{REQUEST_URI} !index.php
 RewriteRule ^(.*)(/)?$ /index.php?dir=$1 [NC,L,QSA]
 
 <IfModule mod_autoindex.c>
