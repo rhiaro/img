@@ -6,7 +6,7 @@ function make_json($dir, $date=null, $name="Album"){
   }
   $json = array(
       "@context" => array(
-           "as2" =>
+           "as2" => "http://www.w3.org/ns/activitystreams#"
           ,"col" => "http://ns.jasnell.me/socialwg/"
           ,"dc" => "http://purl.org/dc/elements/1.1/"
           ,"img" => "http://img.amy.gy/v#"
