@@ -2,7 +2,7 @@ RewriteEngine on
 RewriteBase /
 
 RewriteCond %{SCRIPT_FILENAME} -d
-RewriteRule ^(.*)(/)?$ index.php?dir=$1? [L]
+RewriteRule ^(.*)$ index.php?dir=$1 [L]
 
 <IfModule mod_autoindex.c>
 HeaderName /top.html
