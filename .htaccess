@@ -1,7 +1,7 @@
 RewriteEngine on
 RewriteBase /
 
-RewriteRule .* index.php?dir=$0 [L]
+RewriteRule .* index.php?dir=$1 [L]
 
 <IfModule mod_autoindex.c>
 HeaderName /top.html
