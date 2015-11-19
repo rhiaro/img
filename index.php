@@ -53,6 +53,7 @@ if(isset($_GET['dir']) && is_dir($_GET['dir'])){
 }else{
   // List all albums
   $cur = "/var/www/".$root;
+  var_dump($cur);
   $dirs = scandir($cur);
   echo "<ul>";
   foreach($dirs as $dir){
