@@ -1,8 +1,7 @@
 RewriteEngine on
 RewriteBase /
 
-RewriteRule ^index.php/(.*)(/)?$ index.php?dir=$1 [NC,L,QSA]
-RewriteRule ^(.*)(/)?$ index.php?dir=$1 [NC,L,QSA]
+RewriteRule ^([^/d]+)/?$ index.php?dir=$1 [QSA]
 
 <IfModule mod_autoindex.c>
 HeaderName /top.html
