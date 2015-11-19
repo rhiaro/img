@@ -4,8 +4,8 @@ RewriteEngine on
 RewriteBase /
 
 RewriteCond %{HTTP_ACCEPT} ^.*application/json.* [OR]
-RewriteCond %{HTTP_ACCEPT} ^.*application/ld+json.* [OR]
-RewriteCond %{HTTP_ACCEPT} ^.*application/activity+json.*
+RewriteCond %{HTTP_ACCEPT} ^.*application/ld\+json.* [OR]
+RewriteCond %{HTTP_ACCEPT} ^.*application/activity\+json.*
 
 RewriteRule ^(.*?)/?$ files/$1/$1.json [QSA,L]
 
