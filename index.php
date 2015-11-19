@@ -1,16 +1,53 @@
 <?
+function make_json($dir, $date=null, $name="Album"){
+  $id = "http://img.amy.gy/".$dir;
+  if(!isset($date)){
+    $date = date(DATE_ATOM);
+  }
+  $json = array(
+      "@context" => array(
+           "as2" =>
+          ,"col" => "http://ns.jasnell.me/socialwg/"
+          ,"dc" => "http://purl.org/dc/elements/1.1/"
+          ,"img" => "http://img.amy.gy/v#"
+        ),
+      "@id" => $id,
+      "@type" => array("as2:Collection", "col:Album"),
+      "as2:name" => $name,
+      "as2:published" => $date,
+      "dc:creator" => array("@id" => "http://rhiaro.co.uk/about#me"),
+      "as2:items" => array()
+    );
+  $files = scandir("files/".$dir);
+  foreach($files as $file){
+    $json["as2:items"][] = array("@id" => "http://img.amy.gy/files/".$dir."/".$file, "as2:name" => "");
+  }
+  
+  return json_encode($json);
+}
+
 include "top.html";
 
-var_dump($_GET['dir']);
+$root = "files";
 
 if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   $cur = $_GET['dir'];
-  // Get album metadata
-  $meta = json_decode(file_get_contents($cur."/".$cur.".json"), true);
-  $hidden = json_decode(file_get_contents($meta['img:hidden']), true);
+  $json = $root."/".$cur."/".$cur.".json";
+  var_dump($json);
+  if(file_exists($json)){
+    // Get album metadata
+    $meta = json_decode(file_get_contents($json), true);
+  }else{
+    $j = make_json($cur);
+    var_dump($j);
+    // Create metadata file
+    //$fp = fopen($json, 'w');
+    //fwrite($fp, '1');
+    //fclose($fp);
+  }
 }else{
   // List all albums
-  $cur = "/var/www/";
+  $cur = "/var/www/".$root;
   $dirs = scandir($cur);
   echo "<ul>";
   foreach($dirs as $dir){
