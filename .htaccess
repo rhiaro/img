@@ -1,7 +1,9 @@
 RewriteEngine on
 RewriteBase /
 
-RewriteRule ^(.*)(/)?$ /index.php?dir=$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^([^?]*)$ /index.php?dir=$1 [NC,L,QSA]
 
 <IfModule mod_autoindex.c>
 HeaderName /top.html
