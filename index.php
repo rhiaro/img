@@ -29,7 +29,7 @@ function make_json($dir, $date=null, $name="Album"){
     }
   }
   
-  return json_encode($json);
+  return json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 }
 
 include "top.html";
