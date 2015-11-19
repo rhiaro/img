@@ -24,10 +24,7 @@ function make_json($dir, $date=null, $name="Album"){
     );
   $files = scandir("files/".$dir);
   foreach($files as $file){
-    var_dump($file);
-    var_dump(is_dir("files/".$dir."/".$file));
-    echo "\n\n";
-    if(!is_dir($file)){
+    if(!is_dir("files/".$dir."/".$file)){
       $json["as2:items"][] = array("@id" => "http://img.amy.gy/files/".$dir."/".$file, "as2:name" => "");
     }
   }
