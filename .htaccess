@@ -3,7 +3,7 @@ Options -Indexes
 RewriteEngine on
 RewriteBase /
 
-RewriteRule ^(.*?)/?$ index.php?dir=$1 [L]
+RewriteRule ^(.*?)/?$ index.php?dir=$1 [QSA,L]
 
 <IfModule mod_autoindex.c>
 HeaderName /top.html
