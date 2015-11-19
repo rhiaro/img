@@ -1,15 +1,13 @@
 <?
 include "top.html";
 
-if(isset($_GET['u'])){ $u = $_GET['u']; }
-if(isset($_GET['p'])){ $p = $_GET['p']; }
+var_dump($_GET['dir']);
 
 if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   $cur = $_GET['dir'];
   // Get album metadata
   $meta = json_decode(file_get_contents($cur."/".$cur.".json"), true);
   $hidden = json_decode(file_get_contents($meta['img:hidden']), true);
-  var_dump($hidden);
 }else{
   // List all albums
   $cur = "/var/www/";
