@@ -1,6 +1,7 @@
 RewriteEngine on
 RewriteBase /
 
+RewriteCond %{SCRIPT_FILENAME} -d
 RewriteRule ^(.*)(/)?$ index.php?dir=$1 [QSA]
 
 <IfModule mod_autoindex.c>
