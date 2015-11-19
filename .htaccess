@@ -3,6 +3,9 @@ Options -Indexes
 RewriteEngine on
 RewriteBase /
 
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
 RewriteRule ^(.*?)/?$ index.php?dir=$1 [QSA,L]
 
 <IfModule mod_autoindex.c>
