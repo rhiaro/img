@@ -1,8 +1,7 @@
 RewriteEngine on
 RewriteBase /
 
-RewriteCond %{SCRIPT_FILENAME} -d
-RewriteRule ^(.*)$ index.php?dir=$1 [L]
+RewriteRule ^index/([^/]+).php /index.php?sdir=$1 [NC,L]
 
 <IfModule mod_autoindex.c>
 HeaderName /top.html
