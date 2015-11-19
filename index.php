@@ -32,6 +32,7 @@ $root = "files";
 
 if(isset($_GET['dir']) && is_dir($_GET['dir'])){
   $cur = $_GET['dir'];
+  var_dump($cur);
   $json = $root."/".$cur."/".$cur.".json";
   var_dump($json);
   if(file_exists($json)){
