@@ -45,12 +45,11 @@ if(isset($_GET['dir']) && is_dir($root."/".$_GET['dir'])){
     // Get album metadata
     $meta = json_decode(file_get_contents($json), true);
   }else{
-    $j = make_json($cur);
-    var_dump($j);
     // Create metadata file
-    //$fp = fopen($json, 'w');
-    //fwrite($fp, '1');
-    //fclose($fp);
+    $j = make_json($cur);
+    $fp = fopen($json, 'w');
+    fwrite($fp, $j);
+    fclose($fp);
   }
 }else{
   // List all albums
@@ -60,7 +59,7 @@ if(isset($_GET['dir']) && is_dir($root."/".$_GET['dir'])){
   echo "<ul>";
   foreach($dirs as $dir){
     if(is_dir($dir) && $dir != "." && $dir != ".." && $dir != "auth" && $dir != ".git"){
-      echo "<li><a href=\"?dir=$dir\">$dir</a></li>";
+      echo "<li><a href=\"$dir\">$dir</a></li>";
     }
   }
   echo "</ul>";
