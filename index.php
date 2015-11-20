@@ -130,13 +130,14 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
 ?>
 
 <?if(isset($meta)):?>
-<div>
-  <h2><?=$meta['as2:name']?></h2>
+<div class="h-feed w4of5">
+  <h2 class="p-name"><?=$meta['as2:name']?></h2>
+  <p class="wee">Published on <time class="dt-published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", $meta['as2:published'])?></time> by <a class="h-card u-url" href="<?=$meta['dc:creator']?>"><?=$meta['dc:creator']?></a></p>
   <ul>
     <?foreach($meta['as2:items'] as $item):?>
-      <li>
-        <p><img src="<?=$item['@id']?>" width="200px" /></p>
-        <p><?=$item['as2:name']?> (<?=$item['@id']?>)</p>
+      <li class="h-entry w1of1">
+        <p><a class="u-url" href="<?=$item['@id']?>"><img class="u-photo" src="<?=$item['@id']?>"/></a></p>
+        <p class="p-summary"><?=$item['as2:name']?></p>
       </li>
     <?endforeach?>
   </ul>
