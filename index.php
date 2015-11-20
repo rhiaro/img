@@ -132,7 +132,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
 <?if(isset($meta)):?>
 <div class="h-feed w4of5">
   <h2 class="p-name"><?=$meta['as2:name']?></h2>
-  <p class="wee">Published on <time class="dt-published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", $meta['as2:published'])?></time> by <a class="h-card u-url" href="<?=$meta['dc:creator']?>"><?=$meta['dc:creator']?></a></p>
+  <p class="wee">Published on <time class="dt-published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", strtotime($meta['as2:published']))?></time> by <a class="h-card u-url" href="<?=$meta['dc:creator']['@id']?>"><?=$meta['dc:creator']['@id']?></a></p>
   <ul>
     <?foreach($meta['as2:items'] as $item):?>
       <li class="h-entry w1of1">
