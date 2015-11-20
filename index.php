@@ -36,7 +36,7 @@ include "top.html";
 
 $root = "files";
 
-if(isset($_GET['dir']) && is_dir($root."/".$_GET['dir'])){
+if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   $cur = $_GET['dir'];
   $json = $root."/".$cur."/".$cur.".json";
   if(file_exists($json)){
