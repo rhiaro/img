@@ -114,11 +114,11 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   echo "<ul>";
   foreach($dirs as $dir){
     if(is_dir($root."/".$dir) && $dir != "." && $dir != ".." && $dir != "auth" && $dir != ".git"){
-      $meta = get_meta($dir);
-      if($meta){
-        $name = $meta['as2:name'];
-        $date = $meta['as2:published'];
-        $count = count($meta['as2:items']);
+      $listmeta = get_meta($dir);
+      if($listmeta){
+        $name = $listmeta['as2:name'];
+        $date = $listmeta['as2:published'];
+        $count = count($listmeta['as2:items']);
         echo "<li><a href=\"$dir/\">$name ($count)</a> <i>published: $date</li>";
       }else{
         echo "<li><a href=\"$dir/\">$dir</a></li>";
