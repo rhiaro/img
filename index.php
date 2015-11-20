@@ -51,7 +51,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   if(!$meta){
     // Create metadata file for first time
     $j = make_json($cur);
-    $fp = fopen($json, 'w');
+    $fp = fopen("files/$cur/$cur.json", 'w');
     fwrite($fp, $j);
     fclose($fp);
     $meta = json_decode($j);
@@ -79,6 +79,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
 ?>
 
 <?if(isset($meta)):?>
+<div>
   <h2><?=$meta['as2:name']?></h2>
   <ul>
     <?foreach($meta['as2:items'] as $item):?>
@@ -88,6 +89,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
       </li>
     <?endforeach?>
   </ul>
+</div>
 <?endif?>
 <?
 include "end.html";
