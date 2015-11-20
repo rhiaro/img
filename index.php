@@ -137,7 +137,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
     <?foreach($meta['as2:items'] as $item):?>
       <li class="h-entry w1of1">
         <p><a class="u-url" href="<?=$item['@id']?>"><img class="u-photo" src="<?=$item['@id']?>"/></a></p>
-        <p class="p-summary"><?=$item['as2:name']?></p>
+        <p class="p-summary caption"><?=$item['as2:name']?></p>
       </li>
     <?endforeach?>
   </ul>
