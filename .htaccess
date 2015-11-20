@@ -7,7 +7,7 @@ RewriteCond %{HTTP_ACCEPT} ^.*application/json.* [OR]
 RewriteCond %{HTTP_ACCEPT} ^.*application/ld\+json.* [OR]
 RewriteCond %{HTTP_ACCEPT} ^.*application/activity\+json.*
 
-RewriteRule ^(.*?)/?$ $1.json [L]
+RewriteRule ^(.*?)/?$ $1\.json [L]
 
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
