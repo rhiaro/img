@@ -32,33 +32,46 @@ function make_json($dir, $date=null, $name="Album"){
   return stripslashes(json_encode($json));
 }
 
+function get_meta($dir){
+  $json = "files/$dir/$dir.json";
+  if(file_exists($json)){
+    return json_decode(file_get_contents($json), true);
+  }else{
+    return false;
+  }
+}
+
 include "top.html";
 
 $root = "files";
 
 if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   $cur = $_GET['dir'];
-  $json = $root."/".$cur."/".$cur.".json";
-  if(file_exists($json)){
-    // Get album metadata
-    $meta = json_decode(file_get_contents($json), true);
-  }else{
+  $meta = get_meta($cur);
+  if(!$meta){
     // Create metadata file for first time
     $j = make_json($cur);
     $fp = fopen($json, 'w');
     fwrite($fp, $j);
     fclose($fp);
+    $meta = json_decode($j);
   }
 }else{
   // List all directories
   $cur = "/var/www/".$root."/";
-  var_dump($cur);
   $dirs = scandir($cur);
-  var_dump($dirs);
   echo "<ul>";
   foreach($dirs as $dir){
     if(is_dir($root."/".$dir) && $dir != "." && $dir != ".." && $dir != "auth" && $dir != ".git"){
-      echo "<li><a href=\"$dir/\">$dir</a></li>";
+      $meta = get_meta($dir);
+      if($meta){
+        $name = $meta['as2:name'];
+        $date = $meta['as2:published'];
+        $count = count($meta['as2:items']);
+        echo "<li><a href=\"$dir/\">$name ($count)</a> <i>published: $date</li>";
+      }else{
+        echo "<li><a href=\"$dir/\">$dir</a></li>";
+      }
     }
   }
   echo "</ul>";
