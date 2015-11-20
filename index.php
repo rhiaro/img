@@ -52,8 +52,9 @@ if(isset($_GET['dir']) && is_dir($root."/".$_GET['dir'])){
 }else{
   // List all directories
   $cur = "/var/www/".$root."/";
-  var_dump(is_dir($cur));
+  var_dump($cur);
   $dirs = scandir($cur);
+  var_dump($dirs);
   echo "<ul>";
   foreach($dirs as $dir){
     if(is_dir($dir) && $dir != "." && $dir != ".." && $dir != "auth" && $dir != ".git"){
