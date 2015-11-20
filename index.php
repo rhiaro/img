@@ -57,9 +57,9 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   var_dump($dirs);
   echo "<ul>";
   foreach($dirs as $dir){
-    //if(is_dir($dir) && $dir != "." && $dir != ".." && $dir != "auth" && $dir != ".git"){
+    if(is_dir($root."/".$dir) && $dir != "." && $dir != ".." && $dir != "auth" && $dir != ".git"){
       echo "<li><a href=\"$dir/\">$dir</a></li>";
-    //}
+    }
   }
   echo "</ul>";
 }
