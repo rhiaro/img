@@ -52,7 +52,7 @@ if(isset($_GET['dir']) && is_dir($root."/".$_GET['dir'])){
 }else{
   // List all directories
   $cur = "/var/www/".$root."/";
-  var_dump($cur);
+  var_dump(is_dir($cur));
   $dirs = scandir($cur);
   echo "<ul>";
   foreach($dirs as $dir){
