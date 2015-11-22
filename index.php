@@ -143,7 +143,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
     property="
     <?foreach($meta['@type'] as $type):?>
       <?=$type?>
-    <?foreach?>
+    <?endforeach?>
     "
   <?endif?>
   
