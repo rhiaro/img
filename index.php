@@ -130,18 +130,44 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
 ?>
 
 <?if(isset($meta)):?>
-<div class="h-feed align-center">
+
+<div class="h-feed align-center"
+  <?if(isset($meta['@context'])):?>
+    prefix="
+    <?foreach($meta['@context'] as $pref => $uri):?>
+      <?=$pref?>: <?=$uri?>
+    <?endforeach?>
+    "
+  <?endif?>
+  <?if(isset($meta['@type'])):?>
+    property="
+    <?foreach($meta['@type'] as $type):?>
+      <?=$type?>
+    <?foreach?>
+    "
+  <?endif?>
+  
+>
   <h2 class="p-name"><?=$meta['as2:name']?></h2>
   <p class="wee">Published on <time class="dt-published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", strtotime($meta['as2:published']))?></time> by <a class="h-card u-url" href="<?=$meta['dc:creator']['@id']?>"><?=$meta['dc:creator']['@id']?></a></p>
   <ul class="plist">
     <?foreach($meta['as2:items'] as $item):?>
-      <li class="h-entry w1of1">
+      <li class="h-entry w1of1" property="as2:items"
+      <?if(isset($item['@type'])):?>
+        property="
+        <?foreach($item['@type'] as $type):?>
+          <?=$type?>
+        <?foreach?>
+        "
+      <?endif?>
+      resource="<?=$item['@id']?>">
         <p><a class="u-url" href="<?=$item['@id']?>"><img class="u-photo" src="<?=$item['@id']?>"/></a></p>
-        <p class="p-summary caption"><?=$item['as2:name']?></p>
+        <p class="p-summary caption" property="as2:name"><?=$item['as2:name']?></p>
       </li>
     <?endforeach?>
   </ul>
 </div>
+
 <?endif?>
 <?
 include "end.html";
