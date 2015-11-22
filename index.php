@@ -131,7 +131,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
 
 <?if(isset($meta)):?>
 
-<div class="h-feed align-center" resource="[:this]"
+<div class="h-feed align-center" about="[:this]"
   <?if(isset($meta['@context'])):?>
     prefix="
     <?foreach($meta['@context'] as $pref => $uri):?>
@@ -160,7 +160,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
         <?endforeach?>
         "
       <?endif?>
-      resource="<?=$item['@id']?>">
+      about="<?=$item['@id']?>">
         <p><a class="u-url" href="<?=$item['@id']?>"><img class="u-photo" src="<?=$item['@id']?>"/></a></p>
         <p class="p-summary caption" property="as2:name"><?=$item['as2:name']?></p>
       </li>
