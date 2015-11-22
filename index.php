@@ -140,7 +140,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
     "
   <?endif?>
   <?if(isset($meta['@type'])):?>
-    property="
+    typeof="
     <?foreach($meta['@type'] as $type):?>
       <?=$type?>
     <?endforeach?>
@@ -154,7 +154,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
     <?foreach($meta['as2:items'] as $item):?>
       <li class="h-entry w1of1" property="as2:items"
       <?if(isset($item['@type'])):?>
-        property="
+        typeof="
         <?foreach($item['@type'] as $type):?>
           <?=$type?>
         <?endforeach?>
