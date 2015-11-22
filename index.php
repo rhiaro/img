@@ -160,9 +160,9 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
         <?endforeach?>
         "
       <?endif?>
-      about="<?=$item['@id']?>">
+      >
         <p><a class="u-url" href="<?=$item['@id']?>"><img class="u-photo" src="<?=$item['@id']?>"/></a></p>
-        <p class="p-summary caption" property="as2:name"><?=$item['as2:name']?></p>
+        <p class="p-summary caption" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
       </li>
     <?endforeach?>
   </ul>
