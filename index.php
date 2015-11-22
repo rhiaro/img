@@ -131,7 +131,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
 
 <?if(isset($meta)):?>
 
-<div class="h-feed align-center"
+<div class="h-feed align-center" resource="[:this]"
   <?if(isset($meta['@context'])):?>
     prefix="
     <?foreach($meta['@context'] as $pref => $uri):?>
@@ -148,7 +148,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   <?endif?>
   
 >
-  <h2 class="p-name"><?=$meta['as2:name']?></h2>
+  <h2 class="p-name" property="as2:name"><?=$meta['as2:name']?></h2>
   <p class="wee">Published on <time class="dt-published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", strtotime($meta['as2:published']))?></time> by <a class="h-card u-url" href="<?=$meta['dc:creator']['@id']?>"><?=$meta['dc:creator']['@id']?></a></p>
   <ul class="plist">
     <?foreach($meta['as2:items'] as $item):?>
