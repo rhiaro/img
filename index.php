@@ -157,7 +157,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
         property="
         <?foreach($item['@type'] as $type):?>
           <?=$type?>
-        <?foreach?>
+        <?endforeach?>
         "
       <?endif?>
       resource="<?=$item['@id']?>">
