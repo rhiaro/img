@@ -11,7 +11,7 @@ function make_json($dir, $date=null, $name="Album"){
   $json = array(
       "@context" => array(
            "as2" => "http://www.w3.org/ns/activitystreams#"
-          ,"col" => "http://ns.jasnell.me/socialwg/"
+          ,"col" => "http://ns.jasnell.me/socialwg#"
           ,"dc" => "http://purl.org/dc/elements/1.1/"
           ,"img" => "http://img.amy.gy/v#"
         ),
@@ -146,7 +146,7 @@ include "top.php";
 >
   <h2 class="p-name" property="as2:name"><?=$meta['as2:name']?></h2>
   <div>
-    <p class="wee" property="as2:summary">Published on <time class="dt-published" property="as2:published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", strtotime($meta['as2:published']))?></time> by <a class="h-card u-url" href="<?=$meta['dc:creator']['@id']?>"><?=$meta['dc:creator']['@id']?></a></p>
+    <p class="wee" property="as2:summary">Published on <time class="dt-published" property="as2:published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", strtotime($meta['as2:published']))?></time> by <a class="h-card u-url" property="dc:creator" href="<?=$meta['dc:creator']['@id']?>"><?=$meta['dc:creator']['@id']?></a></p>
     <ul class="plist" rel=as2:items>
       <?foreach($meta['as2:items'] as $item):?>
         <li class="h-entry w1of1"
