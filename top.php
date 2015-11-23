@@ -26,6 +26,15 @@
      }
     </style>
   </head>
-  <body>
-    <h1>Albums</h1>
-    <p><a href="/">&lt; All</a></p>
+  <body
+  <?if(isset($meta['@context'])):?>
+    prefix="this: <?=$meta['@id']?>
+    <?foreach($meta['@context'] as $pref => $uri):?>
+      <?=$pref?>: <?=$uri?>
+    <?endforeach?>
+    "
+  <?endif?>
+  >
+    <main>
+      <h1>Albums</h1>
+      <p><a href="/">&lt; All</a></p>

@@ -92,8 +92,6 @@ function get_meta($dir){
   }
 }
 
-include "top.html";
-
 $root = "files";
 
 if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
@@ -111,7 +109,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   // List all directories
   $cur = "/var/www/".$root."/";
   $dirs = scandir($cur);
-  echo "<ul>";
+  $listout = "<ul>";
   foreach($dirs as $dir){
     if(is_dir($root."/".$dir) && $dir != "." && $dir != ".." && $dir != "auth" && $dir != ".git"){
       $listmeta = get_meta($dir);
@@ -119,26 +117,25 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
         $name = $listmeta['as2:name'];
         $date = $listmeta['as2:published'];
         $count = count($listmeta['as2:items']);
-        echo "<li><a href=\"$dir/\">$name ($count)</a> <i>published: $date</li>";
+        $listout .= "<li><a href=\"$dir/\">$name ($count)</a> <i>published: $date</li>";
       }else{
-        echo "<li><a href=\"$dir/\">$dir</a></li>";
+        $listout .= "<li><a href=\"$dir/\">$dir</a></li>";
       }
     }
   }
-  echo "</ul>";
+  $listout .= "</ul>";
 }
+
+include "top.php";
 ?>
+
+<?if(isset($listout) && !isset($meta)):?>
+<?=$listout?>
+<?endif?>
 
 <?if(isset($meta)):?>
 
-<div class="h-feed align-center" about="<?=$meta['@id']?>"
-  <?if(isset($meta['@context'])):?>
-    prefix="
-    <?foreach($meta['@context'] as $pref => $uri):?>
-      <?=$pref?>: <?=$uri?>
-    <?endforeach?>
-    "
-  <?endif?>
+<article class="h-feed align-center" about="[this:]>"
   <?if(isset($meta['@type'])):?>
     typeof="
     <?foreach($meta['@type'] as $type):?>
@@ -146,27 +143,28 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
     <?endforeach?>
     "
   <?endif?>
-  
 >
   <h2 class="p-name" property="as2:name"><?=$meta['as2:name']?></h2>
-  <p class="wee">Published on <time class="dt-published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", strtotime($meta['as2:published']))?></time> by <a class="h-card u-url" href="<?=$meta['dc:creator']['@id']?>"><?=$meta['dc:creator']['@id']?></a></p>
-  <ul class="plist">
-    <?foreach($meta['as2:items'] as $item):?>
-      <li class="h-entry w1of1" property="as2:items"
-      <?if(isset($item['@type'])):?>
-        typeof="
-        <?foreach($item['@type'] as $type):?>
-          <?=$type?>
-        <?endforeach?>
-        "
-      <?endif?>
-      resource="<?=$item['@id']?>">
-        <p><a class="u-url" href="<?=$item['@id']?>"><img class="u-photo" src="<?=$item['@id']?>"/></a></p>
-        <p class="p-summary caption" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
-      </li>
-    <?endforeach?>
-  </ul>
-</div>
+  <div>
+    <p class="wee" property="as2:summary">Published on <time class="dt-published" property="as2:published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", strtotime($meta['as2:published']))?></time> by <a class="h-card u-url" href="<?=$meta['dc:creator']['@id']?>"><?=$meta['dc:creator']['@id']?></a></p>
+    <ul class="plist" rel=as2:items>
+      <?foreach($meta['as2:items'] as $item):?>
+        <li class="h-entry w1of1"
+        <?if(isset($item['@type'])):?>
+          typeof="
+          <?foreach($item['@type'] as $type):?>
+            <?=$type?>
+          <?endforeach?>
+          "
+        <?endif?>
+        resource="<?=$item['@id']?>">
+          <p><a class="u-url" href="<?=$item['@id']?>"><img class="u-photo" src="<?=$item['@id']?>"/></a></p>
+          <p class="p-summary caption" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
+        </li>
+      <?endforeach?>
+    </ul>
+  </div>
+</article>
 
 <?endif?>
 <?
