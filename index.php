@@ -158,7 +158,7 @@ include "top.php";
           "
         <?endif?>
         resource="<?=$item['@id']?>">
-          <p><a class="u-url" href="<?=$item['@id']?>"><img class="u-photo" src="<?=$item['@id']?>"/></a></p>
+          <p><img class="u-photo" src="<?=$item['@id']?>"/></p>
           <p class="p-summary caption" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
         </li>
       <?endforeach?>
