@@ -108,7 +108,7 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
     }else{
       $errors[] = "Could not write metadata, permission denied.";
     }
-    $meta = json_decode($j);
+    $meta = json_decode($j,true);
   }
 }else{
   // List all directories
