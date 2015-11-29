@@ -93,6 +93,7 @@ function get_meta($dir){
 }
 
 $root = "files";
+$errors = array();
 
 if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   $cur = $_GET['dir'];
@@ -100,9 +101,13 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   if(!$meta){
     // Create metadata file for first time
     $j = make_json($cur);
-    $fp = fopen("files/$cur/$cur.json", 'w');
-    fwrite($fp, indent($j));
-    fclose($fp);
+    $fp = @fopen("files/$cur/$cur.json", 'w');
+    if($fp){
+      fwrite($fp, indent($j));
+      fclose($fp);
+    }else{
+      $errors[] = "Could not write metadata, permission denied.";
+    }
     $meta = json_decode($j);
   }
 }else{
