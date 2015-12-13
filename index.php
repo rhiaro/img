@@ -166,11 +166,11 @@ include "top.php";
           <p><img class="u-photo" src="<?=$item['@id']?>"/></p>
           <div class="caption">
             <a class="left wee u-url" href="#<?=basename($item['@id'], ".jpg")?>">#</a>
-            <p class="p-summary" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
+            <p class="p-summary p-name" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
             <?if(isset($item['as2:tag'])):?>
               <p class="wee unpad" rel="as2:tag">&#978;7
                 <?foreach($item['as2:tag'] as $tag):?>
-                  <a href="<?=$tag['@id']?>" resource="<?=$tag['@id']?>"><span property="as2:name"><?=$tag['as2:name']?></span></a>
+                  <a href="<?=$tag['@id']?>" resource="<?=$tag['@id']?>" class="u-category h-card"><span property="as2:name" class="p-name"><?=$tag['as2:name']?></span></a>
                 <?endforeach?>
               </p>
             <?endif?>
