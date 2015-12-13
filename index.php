@@ -165,7 +165,7 @@ include "top.php";
         resource="<?=$item['@id']?>" id="<?=basename($item['@id'], ".jpg")?>">
           <p><img class="u-photo" src="<?=$item['@id']?>"/></p>
           <div class="caption">
-            <a class="left wee u-url" href="<?=$_SERVER['SERVER_NAME'].basename($item['@id'], ".jpg")?>">#</a>
+            <a class="left wee u-url" href="#<?=basename($item['@id'], ".jpg")?>">#</a>
             <p class="p-summary" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
             <?if(isset($item['as2:tag'])):?>
               <p class="wee unpad" rel="as2:tag">&#978;7
