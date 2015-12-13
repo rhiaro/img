@@ -162,12 +162,13 @@ include "top.php";
           <?endforeach?>
           "
         <?endif?>
-        resource="<?=$item['@id']?>">
+        resource="<?=$item['@id']?>" id="<?=basename($item['@id'], ".jpg")?>">
           <p><img class="u-photo" src="<?=$item['@id']?>"/></p>
           <div class="caption">
+            <a class="left wee u-url" href="<?=$_SERVER['SERVER_NAME'].basename($item['@id'], ".jpg")?>">#</a>
             <p class="p-summary" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
             <?if(isset($item['as2:tag'])):?>
-              <p class="wee unpad" rel="as2:tag">&#9787;
+              <p class="wee unpad" rel="as2:tag">&#978;7
                 <?foreach($item['as2:tag'] as $tag):?>
                   <a href="<?=$tag['@id']?>" resource="<?=$tag['@id']?>"><span property="as2:name"><?=$tag['as2:name']?></span></a>
                 <?endforeach?>
