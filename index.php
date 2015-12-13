@@ -169,7 +169,7 @@ include "top.php";
             <?if(isset($item['as2:tag'])):?>
               <p class="wee unpad" rel="as2:tag">
                 <?foreach($item['as2:tag'] as $tag):?>
-                  <a href="<?=$tag['@id']?>"><span resource="<?=$tag['@id']?>" property="as2:name"><?=$tag['as2:name']?></span></a>
+                  <a href="<?=$tag['@id']?>" resource="<?=$tag['@id']?>"><span property="as2:name"><?=$tag['as2:name']?></span></a>
                 <?endforeach?>
               </p>
             <?endif?>
