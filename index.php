@@ -167,7 +167,7 @@ include "top.php";
           <div class="caption">
             <p class="p-summary" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
             <?if(isset($item['as2:tag'])):?>
-              <p class="wee unpad" rel="as2:tag">
+              <p class="wee unpad" rel="as2:tag">&#9787;
                 <?foreach($item['as2:tag'] as $tag):?>
                   <a href="<?=$tag['@id']?>" resource="<?=$tag['@id']?>"><span property="as2:name"><?=$tag['as2:name']?></span></a>
                 <?endforeach?>
