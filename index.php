@@ -36,7 +36,9 @@ function make_json($dir, $date=null, $name="Album"){
 }
 
 function get_meta($dir){
-  $json = "files/$dir/$dir.json";
+  $fp = explode("/", $dir);
+  $fn = array_pop($fp);
+  $json = "files/$dir/$fn.json";
   if(file_exists($json)){
     return json_decode(file_get_contents($json), true);
   }else{
@@ -53,12 +55,12 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
   if(!$meta){
     // Create metadata file for first time
     $j = make_json($cur);
-    $fp = @fopen("files/$cur/$cur.json", 'w');
-    if($fp){
-      fwrite($fp, indent($j));
-      fclose($fp);
-    }else{
+    $fp = explode("/", $cur);
+    $fn = array_pop($fp);
+    if(!file_put_contents ( "files/$cur/$fn.json" , indent($j) )){
       $errors[] = "Could not write metadata, permission denied.";
+      var_dump($j);
+      var_dump($cur);
     }
     $meta = json_decode($j,true);
   }
@@ -117,7 +119,7 @@ include "top.php";
             <?endif?>
 
           <?if(isset($item['type']) && in_array("Collection", $item['type'])):?>
-            <p class="color1bg"><a href="<?=$item['id']?>"><i class="fa fa-4x fa-photo" /> <?=$item['name']?></a></p>
+            <p class="color1-bg"><a href="<?=$item['id']?>"><i class="fa fa-4x fa-photo" /> <?=$item['name']?></a></p>
           <?else:?>
 
             resource="<?=$item['id']?>" id="<?=basename($item['id'], ".jpg")?>">
