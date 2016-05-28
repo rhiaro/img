@@ -28,8 +28,8 @@
   </head>
   <body
   <?if(isset($meta['@context'])):?>
-    prefix="this: <?=$meta['@id']?>
-    <?foreach($meta['@context'] as $pref => $uri):?>
+    prefix="this: <?=$meta['@id']?> as: http://www.w3.org/ns/activitystreams# 
+    <?foreach($meta['@context'][1] as $pref => $uri):?>
       <?=$pref?>: <?=$uri?>
     <?endforeach?>
     "

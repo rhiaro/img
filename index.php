@@ -106,28 +106,35 @@ include "top.php";
     <p class="wee" property="summary">Published on <time class="dt-published" property="published" datetime=<?=$meta['published']?>><?=date("jS F Y H:i (T)", strtotime($meta['published']))?></time> by <a class="h-card u-url" property="dc:creator" href="<?=$meta['dc:creator']['id']?>"><?=$meta['dc:creator']['id']?></a></p>
     <ul class="plist" rel=items>
       <?foreach($meta['items'] as $item):?>
+
         <li class="h-entry w1of1"
-        <?if(isset($item['type'])):?>
-          typeof="
-          <?foreach($item['type'] as $type):?>
-            <?=$type?>
-          <?endforeach?>
-          "
-        <?endif?>
-        resource="<?=$item['id']?>" id="<?=basename($item['id'], ".jpg")?>">
-          <p><img class="u-photo" src="<?=$item['id']?>"/></p>
-          <div class="caption">
-            <a class="left wee u-url" href="#<?=basename($item['id'], ".jpg")?>">#</a>
-            <p class="p-summary p-name" about="<?=$item['id']?>" property="name"><?=$item['name']?></p>
-            <?if(isset($item['tag'])):?>
-              <p class="wee unpad" rel="tag">&#978;7
-                <?foreach($item['tag'] as $tag):?>
-                  <a href="<?=$tag['id']?>" resource="<?=$tag['id']?>" class="u-category h-card"><span property="name" class="p-name"><?=$tag['name']?></span></a>
-                <?endforeach?>
-              </p>
+            <?if(isset($item['type'])):?>
+              typeof="
+              <?foreach($item['type'] as $type):?>
+                <?=$type?>
+              <?endforeach?>
+              "
             <?endif?>
-          </div>
-        </li>
+
+          <?if(isset($item['type']) && in_array("Collection", $item['type'])):?>
+            <p class="color1bg"><a href="<?=$item['id']?>"><i class="fa fa-4x fa-photo" /> <?=$item['name']?></a></p>
+          <?else:?>
+
+            resource="<?=$item['id']?>" id="<?=basename($item['id'], ".jpg")?>">
+              <p><img class="u-photo" src="<?=$item['id']?>"/></p>
+              <div class="caption">
+                <a class="left wee u-url" href="#<?=basename($item['id'], ".jpg")?>">#</a>
+                <p class="p-summary p-name" about="<?=$item['id']?>" property="name"><?=$item['name']?></p>
+                <?if(isset($item['tag'])):?>
+                  <p class="wee unpad" rel="tag">&#978;7
+                    <?foreach($item['tag'] as $tag):?>
+                      <a href="<?=$tag['id']?>" resource="<?=$tag['id']?>" class="u-category h-card"><span property="name" class="p-name"><?=$tag['name']?></span></a>
+                    <?endforeach?>
+                  </p>
+                <?endif?>
+              </div>
+            <?endif?>
+          </li>
       <?endforeach?>
     </ul>
   </div>
