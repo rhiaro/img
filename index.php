@@ -13,8 +13,8 @@ function make_json($dir, $date=null, $name="Album"){
   $json = array(
       "@context" => array("http://www.w3.org/ns/activitystreams#",
         array(
-             "id" => "@id"
-            ,"type" => "@type"
+             "id" => "id"
+            ,"type" => "type"
             ,"col" => "http://ns.jasnell.me/socialwg#"
             ,"dc" => "http://purl.org/dc/elements/1.1/"
             ,"img" => "http://img.amy.gy/v#"
@@ -23,7 +23,7 @@ function make_json($dir, $date=null, $name="Album"){
       "type" => array("Collection", "col:Album"),
       "name" => $name,
       "published" => $date,
-      "dc:creator" => array("@id" => "http://rhiaro.co.uk/about#me"),
+      "dc:creator" => array("id" => "http://rhiaro.co.uk/about#me"),
       "items" => array()
     );
   $files = scandir("files/".$dir);
@@ -71,9 +71,9 @@ if(isset($_GET['dir']) && $_GET['dir'] != "" && is_dir($root."/".$_GET['dir'])){
     if(is_dir($root."/".$dir) && $dir != "." && $dir != ".." && $dir != "auth" && $dir != ".git"){
       $listmeta = get_meta($dir);
       if($listmeta){
-        $name = $listmeta['as2:name'];
-        $date = $listmeta['as2:published'];
-        $count = count($listmeta['as2:items']);
+        $name = $listmeta['name'];
+        $date = $listmeta['published'];
+        $count = count($listmeta['items']);
         $listout .= "<li><a href=\"$dir/\">$name ($count)</a> <i>published: $date</li>";
       }else{
         $listout .= "<li><a href=\"$dir/\">$dir</a></li>";
@@ -93,36 +93,36 @@ include "top.php";
 <?if(isset($meta)):?>
 
 <article class="h-feed align-center" about="[this:]>"
-  <?if(isset($meta['@type'])):?>
+  <?if(isset($meta['type'])):?>
     typeof="
-    <?foreach($meta['@type'] as $type):?>
+    <?foreach($meta['type'] as $type):?>
       <?=$type?>
     <?endforeach?>
     "
   <?endif?>
 >
-  <h2 class="p-name" property="as2:name"><?=$meta['as2:name']?></h2>
+  <h2 class="p-name" property="name"><?=$meta['name']?></h2>
   <div>
-    <p class="wee" property="as2:summary">Published on <time class="dt-published" property="as2:published" datetime=<?=$meta['as2:published']?>><?=date("jS F Y H:i (T)", strtotime($meta['as2:published']))?></time> by <a class="h-card u-url" property="dc:creator" href="<?=$meta['dc:creator']['@id']?>"><?=$meta['dc:creator']['@id']?></a></p>
-    <ul class="plist" rel=as2:items>
-      <?foreach($meta['as2:items'] as $item):?>
+    <p class="wee" property="summary">Published on <time class="dt-published" property="published" datetime=<?=$meta['published']?>><?=date("jS F Y H:i (T)", strtotime($meta['published']))?></time> by <a class="h-card u-url" property="dc:creator" href="<?=$meta['dc:creator']['id']?>"><?=$meta['dc:creator']['id']?></a></p>
+    <ul class="plist" rel=items>
+      <?foreach($meta['items'] as $item):?>
         <li class="h-entry w1of1"
-        <?if(isset($item['@type'])):?>
+        <?if(isset($item['type'])):?>
           typeof="
-          <?foreach($item['@type'] as $type):?>
+          <?foreach($item['type'] as $type):?>
             <?=$type?>
           <?endforeach?>
           "
         <?endif?>
-        resource="<?=$item['@id']?>" id="<?=basename($item['@id'], ".jpg")?>">
-          <p><img class="u-photo" src="<?=$item['@id']?>"/></p>
+        resource="<?=$item['id']?>" id="<?=basename($item['id'], ".jpg")?>">
+          <p><img class="u-photo" src="<?=$item['id']?>"/></p>
           <div class="caption">
-            <a class="left wee u-url" href="#<?=basename($item['@id'], ".jpg")?>">#</a>
-            <p class="p-summary p-name" about="<?=$item['@id']?>" property="as2:name"><?=$item['as2:name']?></p>
-            <?if(isset($item['as2:tag'])):?>
-              <p class="wee unpad" rel="as2:tag">&#978;7
-                <?foreach($item['as2:tag'] as $tag):?>
-                  <a href="<?=$tag['@id']?>" resource="<?=$tag['@id']?>" class="u-category h-card"><span property="as2:name" class="p-name"><?=$tag['as2:name']?></span></a>
+            <a class="left wee u-url" href="#<?=basename($item['id'], ".jpg")?>">#</a>
+            <p class="p-summary p-name" about="<?=$item['id']?>" property="name"><?=$item['name']?></p>
+            <?if(isset($item['tag'])):?>
+              <p class="wee unpad" rel="tag">&#978;7
+                <?foreach($item['tag'] as $tag):?>
+                  <a href="<?=$tag['id']?>" resource="<?=$tag['id']?>" class="u-category h-card"><span property="name" class="p-name"><?=$tag['name']?></span></a>
                 <?endforeach?>
               </p>
             <?endif?>
