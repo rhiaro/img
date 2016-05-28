@@ -14,6 +14,8 @@
        padding: 0.5em;
        font-weight: bold;
      }
+     li { max-height: 100%; }
+     li img { max-height: 100%; }
      @media screen and (min-width: 768px){
        .plist .caption {
          visibility: hidden;

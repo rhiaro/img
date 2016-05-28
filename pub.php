@@ -2,7 +2,7 @@
 include 'helpers.php';
 
 function verify_token($token){
-  if($token == "1720017e-8148-41b1-964b-329995609601"){
+  if($token == file_get_contents('token')){
     return array("me" => "http://rhiaro.co.uk/about#me", "issued_by" => "https://apps.rhiaro.co.uk", "client_id" => "https://apps.rhiaro.co.uk/", "scope" => "update");
   }else{
     $ch = curl_init("https://tokens.indieauth.com/token");
@@ -104,7 +104,7 @@ if(empty($response)){
         echo "Resource updated";
       }else{
         header("HTTP/1.1 500 Internal Server Error");
-        echo "500: Could not make update (probably a permissions issue).";
+        echo "500: Could not make update (probably a permissions issue). ";
         var_dump($jsonpath);
       }
 

@@ -3,6 +3,8 @@ Options -Indexes
 RewriteEngine on
 RewriteBase /
 
+RewriteRule ^token$ index.php [QSA,L]
+
 RewriteCond %{HTTP_ACCEPT} ^.*application/json.* [OR]
 RewriteCond %{HTTP_ACCEPT} ^.*application/ld\+json.* [OR]
 RewriteCond %{HTTP_ACCEPT} ^.*application/activity\+json.*
