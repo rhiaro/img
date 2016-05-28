@@ -83,17 +83,18 @@ if(empty($response)){
       $json = json_decode(file_get_contents($jsonpath), true);
       
       // Replace object in collection
-      // TODO: not hardcode as2:items
-      foreach($json['as2:items'] as $k => $item){
+      // TODO: not hardcode items
+      foreach($json['items'] as $k => $item){
         if($item["@id"] == $id){
-          $json['as2:items'][$k] = $object;
+          $json['items'][$k] = $object;
         }elseif($item["id"] == $id){
-          $json['as2:items'][$k] = $object;
+          $json['items'][$k] = $object;
         }
       }
 
       // Rewrite collection
       $updated = json_encode_pretty($json);
+      
       if(file_put_contents($jsonpath, $updated)){
         header("HTTP/1.1 201 Created");
         echo "Resource updated";
