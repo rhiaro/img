@@ -79,7 +79,11 @@ if(empty($response)){
       $path = explode("/", str_replace("http://img.amy.gy/files/", "", $id));
       $file = array_pop($path);
       $collection = array_pop($path);
-      $jsonpath = "files/".implode("/",$path).$collection."/".$collection.".json";
+      $pathstr = "";
+      if(count($path) > 0){
+        $pathstr = implode("/", $path);
+      }
+      $jsonpath = "files/".$pathstr."/".$collection."/".$collection.".json";
       $json = json_decode(file_get_contents($jsonpath), true);
       
       // Replace object in collection
@@ -100,12 +104,13 @@ if(empty($response)){
         echo "Resource updated";
       }else{
         header("HTTP/1.1 500 Internal Server Error");
-        echo "500: Could not store activity (probably a permissions issue).";
+        echo "500: Could not make update (probably a permissions issue).";
+        var_dump($jsonpath);
       }
 
     }else{
       header("HTTP/1.1 500 Internal Server Error");
-      echo "500: Could not store activity (probably a permissions issue).";
+      echo "500: Could not store activity log (probably a permissions issue).";
     }
 
   }else{
